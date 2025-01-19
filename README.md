@@ -2,7 +2,7 @@
 
 ## Descrição  
 Este repositório contém um programa para baixar módulos automaticamente e complementar pacotes do Atmosphere 1.8.0.
-## Ele também inclui configurações de EOS (overclock para Nintendo Switch) otimizadas para meu Switch OLED.  
+## Ele também inclui configurações de EOS (overclock para NS) otimizadas para meu NS OLED.  
 
 Minha recomendação é que você baixe o código fonte e execute via linha de comando para criar seu próprio pacote de módulos. Edite o arquivo `links.json` para adicionar ou remover complementos conforme necessário.  
 
