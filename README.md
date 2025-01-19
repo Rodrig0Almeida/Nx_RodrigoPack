@@ -1,4 +1,4 @@
-# Programa para Baixar varios módulos de forma automática para complementar pacotes do Nintendo Switch como (cnx,gnx, kefir,bp....)
+# Programa para Baixar varios módulos de forma automática para complementar pacotes do Nintendo Switch como (BP,cnx,gnx,kefir....)
 
 
 Este repositório contém os seguintes programas baixados automaticamente no momento:
