@@ -16,7 +16,7 @@ def get_latest_release(url, file_type):
     
     if response.status_code != 200:
         print(f"Erro ao acessar {url}: {response.status_code}")
-        return None, None
+        return None, None, None
 
     # Extrai os dados da última release
     release_data = response.json()
@@ -67,7 +67,7 @@ def download_file(url, file_name, output_dir="downloads"):
         print(f"Erro ao baixar {url}: {response.status_code}")
         return None
 
-def extract_file(file_path, extract_to="RodrigoPack", extract_folder=None, file_type="zip"):
+def extract_file(file_path, extract_to="RodrigoPack", extract_folder=None, file_type="zip", copy_to=None):
     """Extrai ou copia um arquivo baseado no seu tipo (ZIP, TAR.GZ, ou outros tipos)."""
     if not os.path.exists(extract_to):
         os.makedirs(extract_to)
@@ -100,9 +100,15 @@ def extract_file(file_path, extract_to="RodrigoPack", extract_folder=None, file_
                     tar_ref.extractall(extract_to)
                     print(f"Arquivo TAR extraído para {extract_to}")
         else:
-            # Se o arquivo não for compactado, apenas copia para a pasta de destino
-            shutil.copy(file_path, os.path.join(extract_to, os.path.basename(file_path)))
-            print(f"Arquivo copiado diretamente para {extract_to}")
+            # Se o arquivo não for compactado, verifica se precisa copiar para uma pasta específica
+            if copy_to:
+                if not os.path.exists(copy_to):
+                    os.makedirs(copy_to)
+                shutil.copy(file_path, os.path.join(copy_to, os.path.basename(file_path)))
+                print(f"Arquivo {file_path} copiado diretamente para {copy_to}")
+            else:
+                shutil.copy(file_path, os.path.join(extract_to, os.path.basename(file_path)))
+                print(f"Arquivo {file_path} copiado diretamente para {extract_to}")
     except (zipfile.BadZipFile, tarfile.TarError) as e:
         print(f"Erro: O arquivo {file_path} não é um arquivo válido ou está corrompido. ({e})")
 
@@ -136,13 +142,10 @@ def main():
             if file_path:
                 # Extrai ou copia o conteúdo da pasta 'Copy_to_SD' (se presente) para RodrigoPack
                 extract_folder = data.get('extract_folder', None)
-                # Se o arquivo não for compactado (como .nro), copia para o destino específico
-                if file_type == "nro":
-                    copy_to = data.get("copy_to", "RodrigoPack")
-                    shutil.copy(file_path, os.path.join(copy_to, file_name))
-                    print(f"Arquivo .nro copiado para {copy_to}")
-                else:
-                    extract_file(file_path, extract_to="RodrigoPack", extract_folder=extract_folder, file_type=file_type)
+                copy_to = data.get("copy_to", None)
+
+                # Chama a função de extração ou cópia, incluindo o suporte ao campo 'copy_to'
+                extract_file(file_path, extract_to="RodrigoPack", extract_folder=extract_folder, file_type=file_type, copy_to=copy_to)
         else:
             print(f"Não foi possível obter o último lançamento de {name}.")
             versions[name] = "Não encontrado"

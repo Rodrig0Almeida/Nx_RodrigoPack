@@ -4,17 +4,71 @@
         "file_type": "zip",
         "extract_folder": "Copy_to_SD"
     },
-    "FanControl": {
-        "url": "https://github.com/Zathawo/NX-FanControl",
-        "file_type": "zip"
-    },
     "Sphaira": {
         "url": "https://github.com/ITotalJustice/sphaira",
         "file_type": "zip"
     },
+    "EdiZon": {
+        "url": "https://github.com/proferabg/EdiZon-Overlay",
+        "file_type": "zip"
+    },
+    "Startus-Monitor": {
+        "url": "https://github.com/masagrator/Status-Monitor-Overlay",
+        "file_type": "zip"
+    },
+    "Fizeau": {
+        "url": "https://github.com/averne/Fizeau",
+        "file_type": "zip"
+    },
+    "SaltyNX": {
+        "url": "https://github.com/masagrator/SaltyNX",
+        "file_type": "zip"
+    },
+    "MissionControl": {
+        "url": "https://github.com/ndeadly/MissionControl",
+        "file_type": "zip"
+    },
+    "Sys-con": {
+        "url": "https://github.com/o0Zz/sys-con",
+        "file_type": "zip"
+    },
+    "FanControl": {
+        "url": "https://github.com/Zathawo/NX-FanControl",
+        "file_type": "zip"
+    },
+    "FPSLocker": {
+        "url": "https://github.com/masagrator/FPSLocker",
+        "file_type": "ovl",
+        "copy_to": "RodrigoPack/switch/.overlays"
+    },
+    "Sysmodules": {
+        "url": "https://github.com/WerWolv/ovl-sysmodules",
+        "file_type": "ovl",
+        "copy_to": "RodrigoPack/switch/.overlays"
+    },
+    "NX-Activity": {
+        "url": "https://github.com/zdm65477730/NX-Activity-Log",
+        "file_type": "nro",
+        "copy_to": "RodrigoPack/switch/Nx-Activity"
+    },
+    "MasterVolume": {
+        "url": "https://github.com/averne/MasterVolume",
+        "file_type": "ovl",
+        "copy_to": "RodrigoPack/switch/.overlays"
+    },
+    "ReverseNx-RT": {
+        "url": "https://github.com/masagrator/ReverseNX-RT",
+        "file_type": "ovl",
+        "copy_to": "RodrigoPack/switch/.overlays"
+    },
+    "NxThemes": {
+        "url": "https://github.com/exelix11/SwitchThemeInjector",
+        "file_type": "nro",
+        "copy_to": "RodrigoPack/switch/NxThemes"
+    },
     "TV": {
         "url": "https://github.com/giovannimirulla/TsVitch",
         "file_type": "nro",
-        "copy_to": "RodrigoPack/switch"
+        "copy_to": "RodrigoPack/switch/TsVitch"
     }
 }
