@@ -61,6 +61,10 @@ python up_pack.py
 ```
 4. O pacote final será gerado na pasta RodrigoPack.
 
+## Para fazer o sphaira baixar e extrair seu pacote diretamente do NS
+
+1. Modifique o arquivo Sphaira.json e coloqueo na pasta do seu pacote gerado pelo programa: RodrigoPack/config/sphaira/github/Sphaira.json
+
 ## Para colocalo em seu próprio Github faça um fork do meu Github.
 
 1. Baixe o código e vá no arquivo github.json e coloque o usuário/respositorio e o seu token
@@ -73,6 +77,3 @@ python up_pack.py
    ```bash
    pyhron3 upgithub.py
    
-## Para fazer o sphaira baixar e extrair seu pacote diretamente do NX
-
-1. 
