@@ -2,7 +2,7 @@
 
 ## Descrição  
 Este repositório contém um programa para baixar módulos automaticamente e complementar pacotes do Atmosphere 1.8.0.
-## Ele também inclui configurações de EOS (overclock para NS) otimizadas para meu NS OLED.  
+## as realeses em .zip inclui configurações de EOS (overclock para NS) otimizadas para meu NS OLED.  
 
 Minha recomendação é que você baixe o código fonte e execute via linha de comando para criar seu próprio pacote de módulos. Edite o arquivo `links.json` para adicionar ou remover complementos conforme necessário.  
 
@@ -60,3 +60,19 @@ No Windows ou Termux, pode ser necessário usar:
 python up_pack.py
 ```
 4. O pacote final será gerado na pasta RodrigoPack.
+
+## Para colocalo em seu próprio Github faça um fork do meu Github.
+
+1. Baixe o código e vá no arquivo github.json e coloque o usuário/respositorio e o seu token
+
+2. Instale módulos extras
+   ```bash
+   pip install requests tqdm requests-toolbelt
+
+3. use o script upgithub.py
+   ```bash
+   pyhron3 upgithub.py
+   
+## Para fazer o sphaira baixar e extrair seu pacote diretamente do NX
+
+1. 
