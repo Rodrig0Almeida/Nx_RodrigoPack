@@ -1,0 +1,20 @@
+{
+    "EOS": {
+        "url": "https://github.com/halop/OC-Switchcraft-EOS",
+        "file_type": "zip",
+        "extract_folder": "Copy_to_SD"
+    },
+    "FanControl": {
+        "url": "https://github.com/Zathawo/NX-FanControl",
+        "file_type": "zip"
+    },
+    "Sphaira": {
+        "url": "https://github.com/ITotalJustice/sphaira",
+        "file_type": "zip"
+    },
+    "TV": {
+        "url": "https://github.com/giovannimirulla/TsVitch",
+        "file_type": "nro",
+        "copy_to": "RodrigoPack/switch"
+    }
+}
