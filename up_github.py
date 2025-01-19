@@ -3,8 +3,8 @@ import requests
 import os
 import zipfile
 import json
-import subprocess
 from datetime import datetime
+from tqdm import tqdm
 
 def create_zip(source_dir, output_zip):
     """Cria um arquivo ZIP da pasta especificada."""
@@ -17,7 +17,7 @@ def create_zip(source_dir, output_zip):
                 zipf.write(file_path, arcname)
     print(f"Arquivo ZIP criado: {output_zip}")
 
-def upload_release(config_path, zip_path, release_name, release_description):
+def upload_release(config_path, zip_path, release_name):
     """Faz upload do ZIP como um release no GitHub."""
     # Lê os dados do arquivo de configuração
     with open(config_path, 'r', encoding='utf-8-sig') as file:
@@ -25,6 +25,14 @@ def upload_release(config_path, zip_path, release_name, release_description):
 
     repository = config["repository"]
     token = config["token"]
+    
+    # Lê o conteúdo do README.md
+    readme_path = "README.md"  # Caminho para o README.md
+    if os.path.exists(readme_path):
+        with open(readme_path, 'r', encoding='utf-8') as readme_file:
+            readme_content = readme_file.read()
+    else:
+        readme_content = "README.md não encontrado. Release gerado automaticamente com o código fonte e arquivos."  # Caso o README.md não exista
     
     # API para criar o release
     release_url = f"https://api.github.com/repos/{repository}/releases"
@@ -37,7 +45,7 @@ def upload_release(config_path, zip_path, release_name, release_description):
     release_data = {
         "tag_name": release_name,
         "name": release_name,
-        "body": release_description,
+        "body": readme_content,  # Agora o conteúdo do README.md é usado como descrição
         "draft": False,
         "prerelease": False
     }
@@ -60,24 +68,23 @@ def upload_release(config_path, zip_path, release_name, release_description):
             "Authorization": f"token {token}",
             "Content-Type": "application/zip"
         }
-        upload_response = requests.post(upload_url, headers=upload_headers, params=params, data=zip_file)
-        if upload_response.status_code == 201:
-            print(f"Arquivo {file_name} enviado com sucesso para o release.")
-        else:
-            print(f"Erro ao enviar o arquivo: {upload_response.status_code} - {upload_response.text}")
 
-def update_github_repo():
-    """Faz commit e push do codigo atual para o repositorio GitHub."""
-    try:
-        # Adiciona e comita os arquivos
-        subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "-m", "Atualizando codigo e arquivos"], check=True)
+        # Obtemos o tamanho do arquivo para usar na barra de progresso
+        total_size = os.path.getsize(zip_path)
 
-        # Faz o push para o repositório remoto
-        subprocess.run(["git", "push"], check=True)
-        print("Repositorio Git atualizado com sucesso!")
-    except subprocess.CalledProcessError as e:
-        print(f"Erro ao atualizar o repositório Git: {e}")
+        # Criar a barra de progresso
+        with tqdm(total=total_size, unit='B', unit_scale=True, desc=f"Enviando {file_name}") as pbar:
+            def progress_callback(chunk):
+                pbar.update(len(chunk))
+                return chunk
+            
+            # Enviar o arquivo com o callback de progresso
+            upload_response = requests.post(upload_url, headers=upload_headers, params=params, data=iter(lambda: progress_callback(zip_file.read(1024 * 1024)), None))
+
+            if upload_response.status_code == 201:
+                print(f"Arquivo {file_name} enviado com sucesso para o release.")
+            else:
+                print(f"Erro ao enviar o arquivo: {upload_response.status_code} - {upload_response.text}")
 
 def main():
     # Caminho da pasta onde o script está e a pasta RodrigoPack
@@ -85,18 +92,14 @@ def main():
     output_zip = "RodrigoPack.zip"  # Nome do arquivo ZIP
     config_path = "github.json"  # Caminho do arquivo de configuração
 
-    # 1. Atualiza o repositório Git com os arquivos locais
-    update_github_repo()
-
-    # 2. Cria o arquivo ZIP da pasta RodrigoPack
+    # 1. Cria o arquivo ZIP da pasta RodrigoPack
     create_zip("RodrigoPack", output_zip)
 
-    # Nome e descrição do release
+    # Nome do release
     release_name = f"Release-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
-    release_description = "Release gerado automaticamente com o codigo fonte e arquivos."
 
-    # 3. Faz o upload do release com o arquivo ZIP
-    upload_release(config_path, output_zip, release_name, release_description)
+    # 2. Faz o upload do release com o arquivo ZIP
+    upload_release(config_path, output_zip, release_name)
 
 if __name__ == "__main__":
     main()
