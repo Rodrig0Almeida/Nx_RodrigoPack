@@ -1,19 +1,59 @@
-# Programa para Baixar varios módulos de forma automática para complementar pacotes do Nintendo Switch como (BP,cnx,gnx,kefir....)
+# Programa para Baixar Módulos de Forma Automática  
+
+## Descrição  
+Este repositório contém um programa para baixar módulos automaticamente e complementar pacotes do Atmosphere 1.8.0.
+## Ele também inclui configurações de EOS (overclock para Nintendo Switch) otimizadas para meu Switch OLED.  
+
+Minha recomendação é que você baixe o código fonte e execute via linha de comando para criar seu próprio pacote de módulos. Edite o arquivo `links.json` para adicionar ou remover complementos conforme necessário.  
+
+---
+
+## Requisitos  
+### Linux  
+1. Instale o Python 3 e `pip`:  
+   ```bash  
+   sudo apt update && sudo apt install python3 python3-pip -y && pip3 install requests tqdm
+   
+### Windows
+1. Baixe e instale o Python 3.
+2. Durante a instalação, habilite a opção "Add Python to PATH".
+3. Instale as dependências via pip:
+   ```bash
+   pip install requests tqdm
+
+### Termux
+
+1. Atualize os pacotes e instale o Python:
+   ```bash
+   pkg update && pkg upgrade -y
+   pkg install python -y
+   pkg install python-pip -y
+   pkg install python-pip -y
+   pip install requests tqdm
+   
+### Mac
+
+1. Certifique-se de ter o Python 3 instalado. No macOS moderno, ele geralmente já está disponível.
+
+Caso precise instalar, use o Homebrew:
+brew install python
+pip3 install requests tqdm
 
 
-Este repositório contém os seguintes programas baixados automaticamente no momento:
+## Como Usar
 
-- **EOS**
-  - Repositório: https://github.com/halop/OC-Switchcraft-EOS
+1. Clone este repositório:
 
-- **FanControl**
-  - Repositório: https://github.com/Zathawo/NX-FanControl
+git clone https://github.com/Rodrig0Almeida/Nx_RodrigoPack.git  
+cd Nx_RodrigoPack
 
-- **Sphaira**
-  - Repositório: https://github.com/ITotalJustice/sphaira
+2. Edite o arquivo links.json para incluir ou remover os complementos desejados.
 
-- **TV**
-  - Repositório: https://github.com/giovannimirulla/TsVitch
+3. Execute o script:
+python3 up_pack.py
+
+No Windows ou Termux, pode ser necessário usar:
+python up_pack.py
 
 
-#no sphaira você pode baixar automaticamente a última versão desse pacote de módulos 
+4. O pacote final será gerado na pasta RodrigoPack.
