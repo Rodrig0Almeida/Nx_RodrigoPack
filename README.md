@@ -12,7 +12,8 @@ Minha recomendação é que você baixe o código fonte e execute via linha de c
 ### Linux  
 1. Instale o Python 3 e `pip`:  
    ```bash  
-   sudo apt update && sudo apt install python3 python3-pip -y && pip3 install requests tqdm
+   sudo apt update && sudo apt install python3 python3-pip -y
+   pip3 install requests tqdm
    
 ### Windows
 1. Baixe e instale o Python 3.
@@ -36,24 +37,26 @@ Minha recomendação é que você baixe o código fonte e execute via linha de c
 1. Certifique-se de ter o Python 3 instalado. No macOS moderno, ele geralmente já está disponível.
 
 Caso precise instalar, use o Homebrew:
-brew install python
-pip3 install requests tqdm
-
+   ```bash
+   brew install python
+   pip3 install requests tqdm
+```
 
 ## Como Usar
 
 1. Clone este repositório:
-
-git clone https://github.com/Rodrig0Almeida/Nx_RodrigoPack.git  
-cd Nx_RodrigoPack
+   ```bash
+   git clone https://github.com/Rodrig0Almeida/Nx_RodrigoPack.git
+   cd Nx_RodrigoPack
 
 2. Edite o arquivo links.json para incluir ou remover os complementos desejados.
 
 3. Execute o script:
-python3 up_pack.py
+   ```bash
+   python3 up_pack.py
 
 No Windows ou Termux, pode ser necessário usar:
+   ```bash
 python up_pack.py
-
-
+```
 4. O pacote final será gerado na pasta RodrigoPack.
